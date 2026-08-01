@@ -1,0 +1,23 @@
+[Unit]
+Description=Buzz Nostr relay
+After=network-online.target postgresql.service dragonfly.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=x
+Group=x
+WorkingDirectory=/adapt/repos/gui/buzz
+EnvironmentFile=/adapt/repos/gui/buzz/.env
+ExecStart=/home/x/.local/bin/buzz-relay
+Restart=on-failure
+RestartSec=5s
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=read-only
+ReadWritePaths=/adapt/repos/gui/buzz/repos
+
+[Install]
+WantedBy=multi-user.target
+

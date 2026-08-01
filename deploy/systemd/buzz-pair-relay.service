@@ -1,0 +1,21 @@
+[Unit]
+Description=Buzz NIP-AB device pairing relay
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=x
+Group=x
+Environment=BUZZ_PAIR_RELAY_BIND_ADDR=0.0.0.0:5000
+ExecStart=/home/x/.local/bin/buzz-pair-relay
+Restart=on-failure
+RestartSec=5s
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=read-only
+
+[Install]
+WantedBy=multi-user.target
+

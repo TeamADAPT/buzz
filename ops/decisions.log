@@ -1,5 +1,11 @@
 # Decisions Log
 
+## 2026-07-31 22:58:11 — SIGNED_BY_AGENT
+Decision recorded: use the generated Debian package for Desktop installation because the AppImage bundler failed inside linuxdeploy; keep the valid `.deb` installation and report the AppImage limitation separately.
+
+## 2026-07-31 22:57:24 — SIGNED_BY_AGENT
+Decision recorded: advertise LAN WebSocket endpoints for local iPhone pairing (`192.168.0.237:3001` and `192.168.0.237:5000/pair`); this is LAN-only and must be replaced with TLS/public DNS before cloud exposure.
+
 ## 2026-07-31 22:37:12 — SIGNED_BY_AGENT
 Decision recorded: use per-user CLI installation under `/home/x/.local/bin`, avoiding system-wide package ownership while keeping the commands available to the desktop and interactive shell.
 
