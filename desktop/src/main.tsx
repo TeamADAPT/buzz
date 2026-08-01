@@ -49,25 +49,28 @@ function configureDevE2eBridgeFromUrl() {
   }
 
   const url = new URL(window.location.href);
-  if (url.searchParams.get("e2e") !== "mock") {
-    return;
+  const isMockParam = url.searchParams.get("e2e") === "mock";
+  const isPlainBrowser = !("window" in globalThis && "__TAURI_INTERNALS__" in window);
+
+  if (isMockParam || isPlainBrowser) {
+    const e2eWindow = window as E2eWindow;
+    e2eWindow.__BUZZ_E2E__ ??= { mode: "mock" };
+
+    const community = {
+      addedAt: new Date().toISOString(),
+      id: E2E_COMMUNITY_ID,
+      name: "Local Dev",
+      relayUrl: "ws://localhost:3001",
+    };
+    if (!window.localStorage.getItem("buzz-communities")) {
+      window.localStorage.setItem("buzz-communities", JSON.stringify([community]));
+      window.localStorage.setItem("buzz-active-community-id", E2E_COMMUNITY_ID);
+      window.localStorage.setItem(
+        `${ONBOARDING_COMPLETION_STORAGE_KEY_PREFIX}${E2E_DEFAULT_PUBKEY}`,
+        "true",
+      );
+    }
   }
-
-  const e2eWindow = window as E2eWindow;
-  e2eWindow.__BUZZ_E2E__ ??= { mode: "mock" };
-
-  const community = {
-    addedAt: new Date().toISOString(),
-    id: E2E_COMMUNITY_ID,
-    name: "E2E Test",
-    relayUrl: "ws://localhost:3000",
-  };
-  window.localStorage.setItem("buzz-communities", JSON.stringify([community]));
-  window.localStorage.setItem("buzz-active-community-id", E2E_COMMUNITY_ID);
-  window.localStorage.setItem(
-    `${ONBOARDING_COMPLETION_STORAGE_KEY_PREFIX}${E2E_DEFAULT_PUBKEY}`,
-    "true",
-  );
 }
 
 function renderApp() {
@@ -95,11 +98,10 @@ function renderApp() {
 }
 
 async function installE2eBridgeIfConfigured() {
-  // The mock bridge is compiled only into dev and explicit E2E builds. A
-  // pre-bootstrap global alone must never activate mock IPC in production.
+  const isPlainBrowser = !("window" in globalThis && "__TAURI_INTERNALS__" in window);
   if (
     !(import.meta.env.DEV || import.meta.env.MODE === "e2e") ||
-    !(window as E2eWindow).__BUZZ_E2E__
+    !((window as E2eWindow).__BUZZ_E2E__ || isPlainBrowser)
   ) {
     return;
   }

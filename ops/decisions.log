@@ -1,0 +1,7 @@
+# Decisions Log
+
+## 2026-07-31 22:26:31 — SIGNED_BY_AGENT
+Decision recorded: task execution is now active under `ops/in_progress/`.
+
+## 2026-07-31 22:26:23 — SIGNED_BY_AGENT
+Decision recorded: keep MeshLLM smoke tests separate from this local installation task; defer cloud-server mesh execution until the local relay, desktop, CLI, and pairing path are verified.
