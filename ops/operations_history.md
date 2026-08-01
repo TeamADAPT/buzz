@@ -1,5 +1,8 @@
 # Operations History
 
+## 2026-07-31 22:58:32 — SIGNED_BY_AGENT
+Moved the completed desktop, CLI, relay, and iPhone pairing task from `ops/in_progress/` to `ops/completed/`.
+
 ## 2026-07-31 22:58:11 — SIGNED_BY_AGENT
 Installed Buzz Desktop 0.5.3 from the generated Debian package, launched `/usr/bin/buzz-desktop`, installed the relay release binary, enabled `buzz-relay.service` and `buzz-pair-relay.service`, and verified both units are active.
 

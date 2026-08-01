@@ -1,5 +1,8 @@
 # Decisions Log
 
+## 2026-07-31 22:58:32 — SIGNED_BY_AGENT
+Decision recorded: mark the task completed after installation, systemd activation, desktop launch, CLI checks, and pairing transport verification; the physical iPhone scan remains the user-facing final step.
+
 ## 2026-07-31 22:58:11 — SIGNED_BY_AGENT
 Decision recorded: use the generated Debian package for Desktop installation because the AppImage bundler failed inside linuxdeploy; keep the valid `.deb` installation and report the AppImage limitation separately.
 
