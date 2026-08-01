@@ -1,5 +1,8 @@
 # Decisions Log
 
+## 2026-07-31 22:37:12 — SIGNED_BY_AGENT
+Decision recorded: use per-user CLI installation under `/home/x/.local/bin`, avoiding system-wide package ownership while keeping the commands available to the desktop and interactive shell.
+
 ## 2026-07-31 22:26:31 — SIGNED_BY_AGENT
 Decision recorded: task execution is now active under `ops/in_progress/`.
 
